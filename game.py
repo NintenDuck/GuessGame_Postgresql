@@ -9,24 +9,31 @@ class game_status( Enum ):
     VICTORY     = 4
     GAMEOVER    = 5
 
-secret_number = 0
-user_selection = 0
-
-def start_game():
-    print("===== GAME START! =====")
-    _init()
-    _game()
-
-def _init():
-    # TODO: FIX CANNOT ACCESS LOCAL VARIABLES
-    secret_number = get_rand_number()
-    if user_selection == secret_number:
-        user_selection += 1
-
-def _game():
-    state = game_status.STARTING
-    while state != game_status.ENDED:
+class Game:
+    def __init__(self, secret_range=5, debug=False) -> None:
+        self.debug = debug
+        self.secret_range = secret_range
+        self.secret_number = self._get_new_secret()
+        self.user_selection = self.secret_range+1
+        self.game_state = game_status.STARTING
+    
+    def start( self ):
+        print("Game Started!!!")
+        self._init()
+        self._game()
+    
+    def _init():
         pass
 
-def get_rand_number():
-    return random.randrange(-10,10)
+    def _game():
+        pass
+    
+    def _get_new_secret( self ):
+        secret_num = random.randrange( -self.secret_range, self.secret_range )
+        return secret_num
+
+    # GETTERS
+    def _get_secret_number( self ):
+        return self.secret_number
+    def _get_user_selection( self ):
+        return self.user_selection
