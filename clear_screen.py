@@ -1,1 +1,4 @@
-# TODO: MAKE FUNCTIO TO CLEAR TERMINAL (WINDOWS OR UNIX BASED)
+import os
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')

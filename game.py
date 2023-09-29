@@ -1,5 +1,6 @@
 import random
 from enum import Enum
+from clear_screen import cls
 # ============================================================== #
 
 class game_status( Enum ):
@@ -18,14 +19,15 @@ class Game:
         self.game_state = game_status.STARTING
     
     def start( self ):
+        cls()
         print("Game Started!!!")
         self._init()
         self._game()
     
-    def _init():
+    def _init( self ):
         pass
 
-    def _game():
+    def _game( self ):
         pass
     
     def _get_new_secret( self ):
