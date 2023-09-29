@@ -29,12 +29,19 @@ class Game:
         self._game_state = game_status.STARTING
 
     def _game( self ):
+        first_round = True
+
         while self._game_state != game_status.ENDED:
             cls()
             if self._get_debug():
-                print("Psssst!, the secret number is", self._get_secret_number())
-                print("Your last guess was:", self._get_user_selection())
+                print(">>> Psssst!, the secret number is", self._get_secret_number())
             print("GUESS THE NUMBER BETWEEN -{0} and {0}".format(self._guess_range))
+            if not first_round:
+                print("Your last guess was:", self._get_user_selection())
+                if self._get_user_selection() > self._get_secret_number():
+                    print("A little lower big boy")
+                else:
+                    print("A little bit higher cowboy")
 
             new_selection = int( input( "Your guess: " ) )
             self._set_user_selection( new_selection )
@@ -42,8 +49,9 @@ class Game:
             if self._get_user_selection() == self._get_secret_number():
                 self._victory_screen()
                 self._set_game_state( game_status.ENDED )
+            
+            first_round = False
         
-        print("Hope to see you again soon human!!!")
 
 
     
@@ -54,7 +62,23 @@ class Game:
     def _victory_screen( self ):
         cls()
         print("You Win!!!")
+        input("Press any key to continue...")
+        self._continue()
 
+    def _continue( self ):
+        cls()
+        print("Want to play again? (Y/N)")
+        res = input("> ")
+        res = res.lower()
+        if res == "y":
+            self.start()
+        elif res == "n":
+            print("Hope to see you again soon human!!!")
+            print("Exiting program...")
+        else:
+            self._continue()
+
+        
     # GETTERS
     def _get_secret_number( self ):
         return self._secret_number
