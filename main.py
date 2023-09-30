@@ -1,8 +1,11 @@
-from game import Game
+from game_menu import Game
+from score_menu import show_table
+
 
 debug = True
 
 def menu():
+    # TODO: MAKE MENU CYCLE UNTIL OTHER ACTION
     print("================= MENU =================")
     print("1) PLAY.")
     print("2) SCORE TABLE.")
@@ -13,11 +16,9 @@ def menu():
         new_game = Game( 5, True )
         new_game.start()
     elif res == 2:
-        score_screen()
+        show_table()
     else:
         return
 
-def score_screen():
-    print("SCORE TABLE")
 
 menu()

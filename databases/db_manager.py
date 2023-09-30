@@ -3,7 +3,7 @@ import json
 
 
 
-def _get_secret_data( name="", secret_file="secret_keys.json" ) -> dict:
+def _get_secret_data( name="", secret_file="databases/secret_keys.json" ) -> dict:
     with open( secret_file, "r" ) as file:
         data = json.load(file)
         return data[name]
@@ -33,7 +33,7 @@ def get_score_table() -> dict:
     connection = conn_data["connection"]
     cursor = conn_data["cursor"]
     
-    cursor.execute("SELECT * FROM score ORDER BY score ASC;")
+    cursor.execute("SELECT * FROM score ORDER BY tries ASC LIMIT 10;")
     score_table = cursor.fetchall()
     cursor.close()
     connection.close()
