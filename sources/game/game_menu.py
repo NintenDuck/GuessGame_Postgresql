@@ -1,5 +1,6 @@
 import random
 from enum import Enum
+from .score_add_menu import show_add_score_menu
 from clear_screen import cls
 # ============================================================== #
 
@@ -15,8 +16,8 @@ class Game:
     def __init__(self, guess_range=5, debug=False) -> None:
         self._debug = debug
         self._guess_range = guess_range
-        self._secret_number = self._get_new_secret()
-        self._user_selection = self._guess_range+1
+        self._secret_number = 0
+        self._user_selection = 0
         self._game_state = game_status.IDLE
     
     def start( self ):
@@ -27,6 +28,8 @@ class Game:
     
     def _init( self ):
         self._game_state = game_status.STARTING
+        self._secret_number = self._get_new_secret()
+        self._user_selection = self._secret_number + 1
 
     def _game( self ):
         first_round = True
@@ -62,17 +65,17 @@ class Game:
     def _victory_screen( self ):
         cls()
         print("You Win!!!")
-        input("Press any key to continue...")
+        input("Press any key...")
+        # show_add_score_menu(10)
         self._continue()
 
     def _continue( self ):
         cls()
-        print("Want to play again? (Y/N)")
+        print("Want to play again? (y/n)")
         res = input("> ")
-        res = res.lower()
-        if res == "y":
+        if res.lower() == "y":
             self.start()
-        elif res == "n":
+        elif res.lower() == "n":
             print("Hope to see you again soon human!!!")
             print("Exiting program...")
         else:

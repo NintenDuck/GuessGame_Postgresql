@@ -1,6 +1,6 @@
-from game_menu import Game
-from score_menu import show_table
-from databases.db_manager import add_score
+from sources.game.game_menu import Game
+from sources.score_table.score_menu import show_table
+from sources.databases.db_manager import add_score
 from clear_screen import cls
 
 debug = True
@@ -24,7 +24,9 @@ def menu():
         elif res == 2:
             show_table()
         elif res == 4 and debug:
+            cls()
             print("No Method assigned!!!")
+            input("Press any key to continue...")
         else:
             return
 

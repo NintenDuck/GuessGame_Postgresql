@@ -1,5 +1,5 @@
 from clear_screen import cls
-from databases.db_manager import get_score_table
+from sources.databases.db_manager import get_score_table
 from enum import Enum
 
 

@@ -2,13 +2,12 @@ import psycopg2
 import json
 
 
-
-def _get_secret_data( name="", secret_file="databases/secret_keys.json" ) -> dict:
+def _get_secret_data( name="", secret_file="sources/databases/secret_keys.json" ) -> dict:
     with open( secret_file, "r" ) as file:
         data = json.load(file)
         return data[name]
         
-def _connect_to_database( file_path="databases/secret_keys.json" ):
+def _connect_to_database( file_path="sources/databases/secret_keys.json" ):
     """Gets the connection and connection cursor as a dictionary
 
     Returns:
