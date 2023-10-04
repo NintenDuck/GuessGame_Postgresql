@@ -52,7 +52,7 @@ class Game:
             self._set_user_selection( new_selection )
 
             if self._get_user_selection() == self._get_secret_number():
-                self._victory_screen( user_tries )
+                self._victory_screen( user_tries+1 )
                 self._set_game_state( game_status.ENDED )
             
             user_tries += 1
@@ -63,11 +63,12 @@ class Game:
         secret_num = random.randrange( -self._guess_range, self._guess_range )
         return secret_num
 
-    def _victory_screen( self, score ):
+    def _victory_screen( self, final_score ):
         cls()
         print("You Win!!!")
+        print("Final score:", final_score )
         input("Press any key...")
-        show_add_score_menu( score )
+        show_add_score_menu( final_score )
         self._continue()
 
     def _continue( self ):
