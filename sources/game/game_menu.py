@@ -33,12 +33,14 @@ class Game:
 
     def _game( self ):
         first_round = True
+        user_tries = 0
 
         while self._game_state != game_status.ENDED:
             cls()
             if self._get_debug():
                 print(">>> Psssst!, the secret number is", self._get_secret_number())
             print("GUESS THE NUMBER BETWEEN -{0} and {0}".format(self._guess_range))
+            print("\t\t\tTries:", user_tries)
             if not first_round:
                 print("Your last guess was:", self._get_user_selection())
                 if self._get_user_selection() > self._get_secret_number():
@@ -50,23 +52,22 @@ class Game:
             self._set_user_selection( new_selection )
 
             if self._get_user_selection() == self._get_secret_number():
-                self._victory_screen()
+                self._victory_screen( user_tries )
                 self._set_game_state( game_status.ENDED )
             
+            user_tries += 1
             first_round = False
-        
-
 
     
     def _get_new_secret( self ):
         secret_num = random.randrange( -self._guess_range, self._guess_range )
         return secret_num
 
-    def _victory_screen( self ):
+    def _victory_screen( self, score ):
         cls()
         print("You Win!!!")
         input("Press any key...")
-        # show_add_score_menu(10)
+        show_add_score_menu( score )
         self._continue()
 
     def _continue( self ):
